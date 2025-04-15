@@ -7,6 +7,7 @@ export default {
       fontFamily: {
         grp: ["Gruppo", "sans-serif"],
         rkt: ["Rokkitt", "serif"],
+        cav: ["Caveat", "cursive"],
       },
     },
   },
