@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
   return (
-    <header className="flex justify-between pr-2 font-rkt w-full fixed z-40 border-b-[1px] border-b-black drop-shadow-xl bg-[#36454f]">
+    <header className="flex justify-between pr-2 font-rkt w-full fixed z-10 border-b-[1px] border-b-black drop-shadow-xl bg-[#36454f]">
       <div className="flex gap-x-2 p-4 pr-1">
         <MessageSquareQuote className="text-orange-600" />
         <h2>Echo</h2>
