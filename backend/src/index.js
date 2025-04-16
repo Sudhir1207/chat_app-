@@ -15,8 +15,10 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
+    limit: '10mb',
   })
 );
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json()); // ✅ This enables req.body parsing
 app.use(cookieParser());
 
