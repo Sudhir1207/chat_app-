@@ -4,27 +4,32 @@ import { ImagePlus, Mail, UserRound } from "lucide-react";
 
 const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
-  const [selectedImg, setSelectedImg] = useState()
+  const [selectedImg, setSelectedImg] = useState();
 
   const handleImgUpload = async (e) => {
     const file = e.target.files[0];
-    if(!file) return;
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("File is too large (max 5MB)");
+      return;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = async()=>{
+    reader.onload = async () => {
       const base64Img = reader.result;
       setSelectedImg(base64Img);
-      await updateProfile({profilePic:base64Img});
-    }
+      await updateProfile({ profilePic: base64Img });
+    };
   };
   return (
-    <div className="min-h-screen w-[90%] mx-auto pt-20 overflow-hidden">
+    <div className="min-h-screen w-[90%] mx-auto pt-9 overflow-hidden">
       <div className="flex flex-col justify-center items-center gap-y-3 shadow-2xl w-[90%] mx-auto p-6 mb-2 ">
-        <h1 className="text-3xl font-rkt text-orange-600">Profile</h1>
+        <h1 className="text-2xl font-rkt text-orange-600">Profile</h1>
         <span className="font-rkt">My Info</span>
         <div className="relative">
           <img
-            src={selectedImg ||authUser.profilePic || "vj.jpg   "}
+            src={selectedImg || authUser.profilePic || "vj.jpg"}
             alt=""
             className="size-32 rounded-full border-4 border-black object-cover"
           />
@@ -78,7 +83,7 @@ const ProfilePage = () => {
         </h1>
         <div className="flex justify-between w-full p-3">
           <span className="font-extralight font-rkt">Member since</span>
-          <span>12-07-2002</span>
+          <span>{authUser.createdAt?.split("T")[0]}</span>
         </div>
         <hr className="h-[1px] w-full bg-gray-300 my-4" />
         <div className="flex justify-between w-full p-3">
