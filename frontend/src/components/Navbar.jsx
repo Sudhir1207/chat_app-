@@ -11,18 +11,21 @@ const Navbar = () => {
         <h2>Echo</h2>
       </div>
 
-      <div className="flex items-center gap-x-2 p-4 pr-1">
-        <Bolt className="text-orange-600 size-5" />
+      <div className="flex items-center gap-x-2">
+        <Bolt className="text-orange-600 size-4" />
         <p className="hidden sm:inline">Settings</p>
         {authUser && (
           <>
-            <Link to={"/profile"} className="flex items-center gap-2">
-              <UserRound className="size-5 text-orange-600" />
+            <Link to={"/profile"} className="flex items-center gap-x-[4px] ">
+              <UserRound className="size-4 text-orange-600" />
               <span className="hidden sm:inline">Profile</span>
             </Link>
 
-            <button onClick={logout} className="flex items-center gap-2">
-              <LogOut className="size-5 text-orange-600" />
+            <button
+              onClick={logout}
+              className="flex items-center gap-x-[4px] pr-2"
+            >
+              <LogOut className="size-4 text-orange-600" />
               <span className="hidden sm:inline">Logout</span>
             </button>
           </>
