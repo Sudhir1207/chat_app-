@@ -15,29 +15,33 @@ const SideBar = () => {
 
   if (isUsersLoading) return <SidebarSkeleton />;
   return (
-    <div className="bg-gray-900 w-[30%] h-[80vh]">
-      <div className="p-4 flex gap-2 items-center">
-        <Users className="text-orange-600 size-5" />
-        <span className="text-sm lg:text-lg">Contacts</span>
-      </div>
-      <label className="ml-3 flex items-center">
-        <input
-          type="checkbox"
-          name="showOnline"
-          className="appearance-none w-3 h-3 border border-gray-300 rounded-md checked:bg-green-600 checked:border-transparent focus:outline-none transition duration-200"
-        />
-        <span className="ml-2 text-[10px] lg:text-lg text-nowrap">
-          Show online only
-        </span>
-      </label>
-      <div className="border-t-[1px] border-orange-600 mt-4"></div>
+    <div className="w-[30%] h-[80vh] flex flex-col">
+      <div className="p-4 flex flex-col gap-2 border-r-[1px] border-orange-600">
+        <div className="flex items-center gap-2">
+          <Users className="text-orange-600 size-5" />
+          <span className="text-sm lg:text-lg">Contacts</span>
+        </div>
 
-      <div className="overflow-y-auto w-full">
+        <label className="flex items-center">
+          <input
+            type="checkbox"
+            name="showOnline"
+            className="appearance-none w-3 h-3 border border-gray-300 rounded-md checked:bg-green-600 checked:border-transparent focus:outline-none transition duration-200"
+          />
+          <span className="ml-2 text-[10px] lg:text-lg text-nowrap">
+            Show online only
+          </span>
+        </label>
+      </div>
+
+      <div className="border-t-[1px] border-orange-600"></div>
+
+      <div className="overflow-y-auto w-full scrollbar-thumb-orange-600 scrollbar-thin scrollbar-track-gray-800">
         {users.map((user) => (
           <button
             key={user._id}
             onClick={() => setSelectedUser(user)}
-            className={`w-full flex items-center hover:bg-gray-800 transition-colors ${
+            className={`w-full flex items-center hover:bg-gray-800 transition-colors py-4 lg:py-2 ${
               selectedUser?._id === user._id
                 ? "bg-gray-800 ring-1 ring-gray-800"
                 : ""

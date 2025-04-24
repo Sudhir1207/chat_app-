@@ -29,9 +29,15 @@ const ProfilePage = () => {
         <span className="font-rkt">My Info</span>
         <div className="relative">
           <img
-            src={selectedImg || authUser.profilePic || "vj.jpg"}
+            src={
+              isUpdatingProfile
+                ? "/waiting_pablo.jpg"
+                : selectedImg || authUser.profilePic || "vj.jpg"
+            }
             alt=""
-            className="size-32 rounded-full border-4 border-black object-cover"
+            className={`size-32 rounded-full border-4 border-black object-cover ${
+              isUpdatingProfile ? "animate-pulse" : ""
+            }`}
           />
           <label
             htmlFor="img-upload"
