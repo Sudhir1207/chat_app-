@@ -16,7 +16,7 @@ const SideBar = () => {
   if (isUsersLoading) return <SidebarSkeleton />;
   return (
     <div className="w-[30%] h-[80vh] flex flex-col">
-      <div className="p-4 flex flex-col gap-2 border-r-[1px] border-orange-600">
+      <div className="p-2 flex flex-col gap-2 border-r-[1px] border-orange-600">
         <div className="flex items-center gap-2">
           <Users className="text-orange-600 size-5" />
           <span className="text-sm lg:text-lg">Contacts</span>
@@ -26,7 +26,7 @@ const SideBar = () => {
           <input
             type="checkbox"
             name="showOnline"
-            className="appearance-none w-3 h-3 border border-gray-300 rounded-md checked:bg-green-600 checked:border-transparent focus:outline-none transition duration-200"
+            className="appearance-none w-3 h-3 border border-gray-300 rounded-md checked:bg-green-600 checked:border-transparent focus:outline-none transition duration-300"
           />
           <span className="ml-2 text-[10px] lg:text-lg text-nowrap">
             Show online only
@@ -36,7 +36,7 @@ const SideBar = () => {
 
       <div className="border-t-[1px] border-orange-600"></div>
 
-      <div className="overflow-y-auto w-full scrollbar-thumb-orange-600 scrollbar-thin scrollbar-track-gray-800">
+      <div className="overflow-y-auto w-full scrollbar-thumb-orange-600 scrollbar-thin scrollbar-track-slate-950">
         {users.map((user) => (
           <button
             key={user._id}
