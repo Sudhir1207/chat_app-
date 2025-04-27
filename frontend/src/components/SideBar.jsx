@@ -33,15 +33,17 @@ const SideBar = () => {
             type="checkbox"
             name="showOnline"
             checked={showOnlineUsers}
-            onChange={(e) => setShowOnlineOnly(e.target.checked)}
+            onChange={(e) => setShowOnlineUsers(e.target.checked)}
             className="appearance-none w-3 h-3 border border-gray-300 rounded-md checked:bg-green-600 checked:border-transparent focus:outline-none transition duration-300"
           />
-          <span className="ml-2 text-[15px] lg:text-md text-nowrap">
-            Show online only
-          </span>
-          <span className="text-xs ml-2 text-gray-500">
-            ({onlineUsers.length - 1} online)
-          </span>
+          <div className="flex items-center">
+            <span className="ml-2 text-[10px] lg:text-sm text-nowrap">
+              Show online only
+            </span>
+            <span className="text-xs ml-2 text-gray-500">
+              ({onlineUsers.length - 1} online)
+            </span>
+          </div>
         </label>
       </div>
 
@@ -67,7 +69,7 @@ const SideBar = () => {
                 }`}
               />
               {onlineUsers.includes(user._id) && (
-                <span className="absolute size-2 -translate-y-9 translate-x-2 bg-green-500 rounded-full ring-2 ring-black" />
+                <span className="absolute size-2 -translate-y-10 translate-x-2 bg-green-500 rounded-full ring-2 ring-black" />
               )}
             </div>
             <div className="hidden lg:flex flex-col items-start ml-2 ">

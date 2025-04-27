@@ -32,7 +32,7 @@ const ProfilePage = () => {
             src={
               isUpdatingProfile
                 ? "/waiting_pablo.jpg"
-                : selectedImg || authUser.profilePic || "vj.jpg"
+                : selectedImg || authUser.profilePic
             }
             alt=""
             className={`size-32 rounded-full border-4 border-black object-cover ${
