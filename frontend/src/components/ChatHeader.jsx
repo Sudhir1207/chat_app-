@@ -1,11 +1,12 @@
 import React from "react";
 import { useChatStore } from "../store/useChatStore";
 import { X } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
 
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
-  //   const { onlineUsers } = useAuthStore();
-  const onlineUsers = [];
+  const { onlineUsers } = useAuthStore();
+
   return (
     <div className="w-full h-[8vh] bg-gray-900 border-b-[1px] border-orange-600">
       <div className="flex justify-between items-center p-2">

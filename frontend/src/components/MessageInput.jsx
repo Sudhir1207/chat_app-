@@ -59,10 +59,10 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="w-full relative">
-      <div className="absolute -translate-y-24 translate-x-2 -left-4 right-0 px-2 ">
+    <div className="w-full relative z-50">
+      <div className="absolute -translate-y-24 translate-x-2 px-2">
         {imgPrv && (
-          <div className="relative bg-slate-900 p-2 w-full animate-slideUp">
+          <div className="relative bg-slate-900 p-2 w-full">
             <img
               src={imgPrv || "/vj.jpg"}
               alt="prev"
@@ -80,7 +80,7 @@ const MessageInput = () => {
 
       <form
         onSubmit={handleSndMsg}
-        className="flex items-center gap-1 bg-slate-900 p-3"
+        className="flex items-center gap-1 bg-slate-900 p-3 pb-4"
       >
         <div className="flex-1 flex gap-1">
           <input
