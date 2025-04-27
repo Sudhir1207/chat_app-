@@ -63,7 +63,7 @@ const LoginPage = () => {
           onSubmit={handleSubmit}
           className="flex flex-col gap-y-2 mt-4 w-[60%]"
         >
-          <label for="email" className="font-extralight text-[14px]">
+          <label htmlFor="email" className="font-extralight text-[14px]">
             Email
           </label>
           <div className="relative">

@@ -60,9 +60,9 @@ const MessageInput = () => {
 
   return (
     <div className="w-full relative">
-      <div className="absolute -translate-y-24 translate-x-2 -left-4 right-0 px-2">
+      <div className="absolute -translate-y-24 translate-x-2 -left-4 right-0 px-2 ">
         {imgPrv && (
-          <div className="relative bg-slate-900 p-2 w-full">
+          <div className="relative bg-slate-900 p-2 w-full animate-slideUp">
             <img
               src={imgPrv || "/vj.jpg"}
               alt="prev"
