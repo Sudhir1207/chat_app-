@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useEffect } from "react";
 import ChatHeader from "./ChatHeader";
@@ -16,6 +16,7 @@ const ChatContainer = () => {
   } = useChatStore();
 
   const { authUser } = useAuthStore();
+  const autoScrollRef = useRef();
 
   useEffect(() => {
     getMessages(selectedUser._id);
@@ -23,6 +24,12 @@ const ChatContainer = () => {
 
     return () => unSubToMsgs();
   }, [selectedUser._id, getMessages, subToMsgs, unSubToMsgs]);
+
+  useEffect(() => {
+    if (autoScrollRef.current && messages) {
+      autoScrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   if (isMessagesLoading)
     return (
@@ -44,6 +51,7 @@ const ChatContainer = () => {
               className={`chat ${
                 message.senderId === authUser._id ? "chat-end" : "chat-start"
               }`}
+              ref={autoScrollRef}
             >
               <div className="chat-image avatar">
                 <div className="size-10 rounded-full border">
@@ -62,7 +70,7 @@ const ChatContainer = () => {
                   {message.createdAt}
                 </time>
               </div>
-              <div className="chat-bubble flex">
+              <div className="chat-bubble flex flex-col text-sm">
                 {message.image && (
                   <img
                     src={message.image}
