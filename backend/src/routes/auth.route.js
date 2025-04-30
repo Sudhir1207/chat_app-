@@ -5,6 +5,7 @@ import {
   signup,
   updateProfile,
   changeUsername,
+  deleteAccount,
   checkAuth,
 } from "../controllers/auth.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
@@ -21,5 +22,7 @@ router.put("/update-profile", protectRoute, updateProfile);
 router.get("/check", protectRoute, checkAuth);
 
 router.put("/change-username", protectRoute, changeUsername);
+
+router.delete("/delete-account", protectRoute, deleteAccount);
 
 export default router;

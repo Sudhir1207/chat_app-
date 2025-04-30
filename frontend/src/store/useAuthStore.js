@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import io from "socket.io-client";
+import axios from "axios";
 
 const BASE_URL = "http://localhost:5001";
 export const useAuthStore = create((set, get) => ({
@@ -10,6 +11,7 @@ export const useAuthStore = create((set, get) => ({
   isLoggingIn: false,
   isUpdatingProfile: false,
   isUpdatingUsername: false,
+  isDeletingAccount: false,
   isCheckingAuth: true,
   onlineUsers: [],
   socket: null,
@@ -91,6 +93,21 @@ export const useAuthStore = create((set, get) => ({
       toast.error("Failed to update username");
     } finally {
       set({ isUpdatingUsername: false });
+    }
+  },
+
+  deleteAccount: async () => {
+    set({ isDeletingAccount: true });
+    try {
+      await axiosInstance.delete("/auth/delete-account");
+      set({ authUser: null });
+      toast.success("Account deleted successfully");
+      get().disconnectSocket();
+    } catch (error) {
+      console.log("Error deleting account", error.message);
+      toast.error("Failed to delete account");
+    } finally {
+      set({ isDeletingAccount: false });
     }
   },
 

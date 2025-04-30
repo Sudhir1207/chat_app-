@@ -126,6 +126,17 @@ export const changeUsername = async (req, res) => {
   }
 };
 
+export const deleteAccount = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user._id);
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).json({ message: "Account Deleted Successfully" });
+  } catch (error) {
+    console.log("Error in deleting account", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const checkAuth = (req, res) => {
   try {
     res.status(200).json(req.user);

@@ -4,7 +4,13 @@ import { useAuthStore } from "../store/useAuthStore";
 import toast from "react-hot-toast";
 
 const SettingsPage = () => {
-  const { authUser, updateUsername, isUpdatingUsername } = useAuthStore();
+  const {
+    authUser,
+    updateUsername,
+    isUpdatingUsername,
+    deleteAccount,
+    isDeletingAccount,
+  } = useAuthStore();
   const [activeModal, setActiveModal] = useState(null);
   const [text, setText] = useState(authUser.fullName);
 
@@ -18,6 +24,11 @@ const SettingsPage = () => {
       return;
     }
     await updateUsername({ fullName: text.trim() });
+    setActiveModal(null);
+  };
+
+  const handleDelete = async () => {
+    await deleteAccount();
     setActiveModal(null);
   };
 
@@ -77,8 +88,12 @@ const SettingsPage = () => {
               Are you sure about that ?
             </span>
             <span>Warning: This Action is Irreversible</span>
-            <button className="bg-orange-600 p-2 rounded text-black hover:bg-orange-700">
-              Delete Account
+            <button
+              className="bg-orange-600 p-2 rounded text-black hover:bg-orange-700"
+              onClick={handleDelete}
+              disabled={isDeletingAccount}
+            >
+              {isDeletingAccount ? "Deleting..." : "Delete Account"}
             </button>
             <button
               className="absolute top-2 right-2 hover:text-red-600 "
