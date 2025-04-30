@@ -12,10 +12,13 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-x-2">
-        <Bolt className="text-orange-600 size-4" />
-        <p className="hidden sm:inline">Settings</p>
         {authUser && (
           <>
+            <Link to={"/settings"} className="flex items-center gap-x-[4px]">
+              <Bolt className="text-orange-600 size-4" />
+              <p className="hidden sm:inline">Settings</p>
+            </Link>
+
             <Link to={"/profile"} className="flex items-center gap-x-[4px] ">
               <UserRound className="size-4 text-orange-600" />
               <span className="hidden sm:inline">Profile</span>

@@ -9,6 +9,7 @@ export const useAuthStore = create((set, get) => ({
   isSigningUp: false,
   isLoggingIn: false,
   isUpdatingProfile: false,
+  isUpdatingUsername: false,
   isCheckingAuth: true,
   onlineUsers: [],
   socket: null,
@@ -76,6 +77,20 @@ export const useAuthStore = create((set, get) => ({
       console.log("Error updating profile", error);
     } finally {
       set({ isUpdatingProfile: false });
+    }
+  },
+
+  updateUsername: async (data) => {
+    set({ isUpdatingUsername: true });
+    try {
+      const res = await axiosInstance.put("/auth/change-username", data);
+      set({ authUser: res.data });
+      toast.success("Username updated successfully");
+    } catch (error) {
+      console.log("Error updating username");
+      toast.error("Failed to update username");
+    } finally {
+      set({ isUpdatingUsername: false });
     }
   },
 

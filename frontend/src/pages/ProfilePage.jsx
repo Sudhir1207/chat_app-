@@ -66,7 +66,7 @@ const ProfilePage = () => {
           <div className="flex gap-x-2 items-center">
             <UserRound className="size-4" />
             <label htmlFor="fullName" className="text-sm">
-              Full Name
+              User Name
             </label>
           </div>
           <p className="border-2 pl-3 pr-3 rounded-lg border-orange-600">
