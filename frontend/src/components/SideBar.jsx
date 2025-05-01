@@ -19,6 +19,8 @@ const SideBar = () => {
     ? users.filter((user) => onlineUsers.includes(user._id))
     : users;
 
+  const noOnlineUsers = filteredUsers.length === 0;
+
   if (isUsersLoading) return <SidebarSkeleton />;
   return (
     <div className="w-[30%] h-[80vh] flex flex-col">
@@ -50,36 +52,42 @@ const SideBar = () => {
       {/* <div className="border-t-[1px] border-orange-600"></div> */}
 
       <div className="overflow-y-auto w-full scrollbar-thumb-orange-600 scrollbar-thin scrollbar-track-slate-950">
-        {filteredUsers.map((user) => (
-          <button
-            key={user._id}
-            onClick={() => setSelectedUser(user)}
-            className={`w-full flex items-center hover:bg-gray-800 transition-colors py-4 lg:py-2 ${
-              selectedUser?._id === user._id
-                ? "bg-gray-800 ring-1 ring-gray-800"
-                : ""
-            }`}
-          >
-            <div className="relative mx-auto lg:mx-0 py-3 lg:pl-5">
-              <img
-                src={user.profilePic || "/circle-user.svg"}
-                alt="user.name"
-                className={`size-8 lg:size-10 object-cover rounded-full ${
-                  !user.profilePic ? "bg-white" : ""
-                }`}
-              />
-              {onlineUsers.includes(user._id) && (
-                <span className="absolute size-2 -translate-y-10 translate-x-2 bg-green-500 rounded-full ring-2 ring-black" />
-              )}
-            </div>
-            <div className="hidden lg:flex flex-col items-start ml-2 ">
-              <div className="ml-2">{user.fullName}</div>
-              <span className=" text-gray-400 text-sm ml-2">
-                {onlineUsers.includes(user._id) ? "Online" : "Offline"}
-              </span>
-            </div>
-          </button>
-        ))}
+        {noOnlineUsers ? (
+          <div className="text-center text-gray-300 py-4">
+            No Online Users Found
+          </div>
+        ) : (
+          filteredUsers.map((user) => (
+            <button
+              key={user._id}
+              onClick={() => setSelectedUser(user)}
+              className={`w-full flex items-center hover:bg-gray-800 transition-colors py-4 lg:py-2 ${
+                selectedUser?._id === user._id
+                  ? "bg-gray-800 ring-1 ring-gray-800"
+                  : ""
+              }`}
+            >
+              <div className="relative mx-auto lg:mx-0 py-3 lg:pl-5">
+                <img
+                  src={user.profilePic || "/circle-user.svg"}
+                  alt={user.name}
+                  className={`size-8 lg:size-10 object-cover rounded-full ${
+                    !user.profilePic ? "bg-white" : ""
+                  }`}
+                />
+                {onlineUsers.includes(user._id) && (
+                  <span className="absolute size-2 -translate-y-10 translate-x-2 bg-green-500 rounded-full ring-2 ring-black" />
+                )}
+              </div>
+              <div className="hidden lg:flex flex-col items-start ml-2 ">
+                <div className="ml-2">{user.fullName}</div>
+                <span className=" text-gray-400 text-sm ml-2">
+                  {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+                </span>
+              </div>
+            </button>
+          ))
+        )}
       </div>
     </div>
   );

@@ -10,8 +10,12 @@ const SettingsPage = () => {
     isUpdatingUsername,
     deleteAccount,
     isDeletingAccount,
+    changePassword,
   } = useAuthStore();
   const [activeModal, setActiveModal] = useState(null);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [text, setText] = useState(authUser.fullName);
 
   const handleChange = (e) => {
@@ -29,6 +33,20 @@ const SettingsPage = () => {
 
   const handleDelete = async () => {
     await deleteAccount();
+    setActiveModal(null);
+  };
+
+  const handleApply = () => {
+    if (!currentPassword || !newPassword) {
+      setErrorMessage("Please fill in both fields");
+      return;
+    }
+
+    changePassword(currentPassword, newPassword);
+
+    setErrorMessage("");
+    setCurrentPassword("");
+    setNewPassword("");
     setActiveModal(null);
   };
 
@@ -63,13 +81,38 @@ const SettingsPage = () => {
       {activeModal === "password" && (
         <div className=" w-[40%] h-[60vh] lg:h-[50vh] fixed m-auto bg-black bg-opacity-80 ring-2 ring-orange-600 rounded-lg z-50 flex justify-center items-center ">
           <div className="flex flex-col items-center justify-center gap-3 w-full">
-            <span className="text-orange-600">Change Password</span>
-            <input
-              type="text"
-              className="bg-white rounded text-black pl-2 w-[80%] h-8"
-            />
-            <button className="bg-orange-600 p-2 rounded text-black hover:bg-orange-700">
-              Apply Changes
+            <div className="flex gap-2 items-center">
+              <label for="current-password"> Current Password</label>
+              <input
+                type="text"
+                name="current-password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                className="bg-white rounded text-black pl-2 w-[40%] h-7"
+              />
+            </div>
+            <div className="flex gap-2 items-center">
+              <label for="new-password">New Password</label>
+              <input
+                type="text"
+                name="new-password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="bg-white rounded text-black pl-2 w-[40%] h-7 ml-5"
+              />
+            </div>
+
+            {errorMessage && (
+              <div className="text-red-500 text-sm text-center">
+                {errorMessage}
+              </div>
+            )}
+
+            <button
+              className="bg-orange-600 p-2 rounded text-black hover:bg-orange-700 mt-4"
+              onClick={handleApply}
+            >
+              Change Password
             </button>
             <button
               className="absolute top-2 right-2 hover:text-red-600"

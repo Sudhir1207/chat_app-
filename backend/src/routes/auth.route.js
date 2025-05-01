@@ -5,6 +5,7 @@ import {
   signup,
   updateProfile,
   changeUsername,
+  changePassword,
   deleteAccount,
   checkAuth,
 } from "../controllers/auth.controller.js";
@@ -22,6 +23,8 @@ router.put("/update-profile", protectRoute, updateProfile);
 router.get("/check", protectRoute, checkAuth);
 
 router.put("/change-username", protectRoute, changeUsername);
+
+router.put("/change-password", protectRoute, changePassword);
 
 router.delete("/delete-account", protectRoute, deleteAccount);
 
