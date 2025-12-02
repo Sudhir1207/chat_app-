@@ -51,7 +51,7 @@ const SideBar = () => {
 
       {/* <div className="border-t-[1px] border-orange-600"></div> */}
 
-      <div className="overflow-y-auto w-full scrollbar-thumb-orange-600 scrollbar-thin scrollbar-track-slate-950">
+      <div className="overflow-y-auto w-full scrollbar-none">
         {noOnlineUsers ? (
           <div className="text-center text-gray-300 py-4">
             No Online Users Found
