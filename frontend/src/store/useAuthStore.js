@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import io from 'socket.io-client'
 import axios from 'axios'
 
-const BASE_URL = import.meta.env.VITE_API_URL
+const BASE_URL = 'http://localhost:5001'
 export const useAuthStore = create((set, get) => ({
   authUser: null,
   isSigningUp: false,
